@@ -1,15 +1,16 @@
 @import 
 url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&display=swap');
 
+
 *{
 	box-sizing: border-box;
 }
 
+
 body{
 	margin: 0;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Raleway", sans-serif;
 	text-align: center;
-	
 }
 
 img{
@@ -22,13 +23,52 @@ img{
 	margin: 0 auto;
 }
 
+/*------TYPOGRAPHY------*/
+.title{
+	font-size: 36px;
+	margin-bottom: 30px;
+}
 
-/*-------------Header----------------*/
+.title span{
+	font-weight: 300;
+	display: block;
+}
+
+@media (min-width: 900px) {
+	.title{
+		font-size: 72px;
+	}
+}
+
+
+.button {
+	display: inline-block;
+	font-size: 19px;
+	text-decoration: none;
+	text-transform: uppercase;
+	border-width: 3px;
+	border-style: solid;
+	padding: 8px 5px;
+}
+
+.button-accent{
+	color: #8B0000;
+	border-color: #8B0000;
+}
+
+
+.button-accent:hover, .button-accent:focus{
+	background: #E31230;
+	color: #FFF;
+}
+
+
+/*------HEADER------*/
 header{
 	position: absolute;
 	left: 0;
 	right: 0;
-	margin: 10px;
+	margin: 20px;
 }
 
 nav ul{
@@ -46,51 +86,33 @@ nav a{
 	font-weight: 900;
 	text-decoration: none;
 	text-transform: uppercase;
-	font-size: 14px;
-	padding: 7px;
-	color: #FFF;
+	font-size: 24;
+	padding: 8px;
+	color: #FFF
 }
 
-nav a: hover, nav a: focus {
-	color: #DDD;
+nav a:hover, nav a:focus{
+	color:#DDD;
 }
 
-
-
-/*-------------Typography----------------*/
-.title{
-	font-size: 56px;
-}
-.title span{
-	display: block;
-}
-
-
-/*-------------BUTTONS----------------*/
-.button{
-	display: inline-block;
-	font-size: 28px;
-	text-decoration: none;
-	text-transform: uppercase;
-	border-width: 3px;
-	border-style: solid;
-	padding: 15px;
-}
-.button-accent{
-	color: #880E4F;
-	border-color: #880E4F;
+@media (min-width: 900px)
+{
+	.logo{
+		float: left;
+	}
+	nav{
+		float: right;
+	}
+	h2{
+		float: left;
+		
+	}
 }
 
-.button-accent:hover,
-.button-accent:focus{
-	background: #C2185B;
-	color:#FFF;
-}
-
-/*-------------Homepage----------------*/
+/*------HOMEPAGE------*/
 
 .homepage{
 	background-image: url(img/homepage.jpg);
-	padding: 300px;
+	padding: 160px 0px;
 	color: #FFF;
 }
