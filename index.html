@@ -8,69 +8,101 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Applied before paint so there's no flash of the wrong theme.
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
   <div class="wrap">
 
-    <header class="hero">
-      <p class="eyebrow">shubham bhagwat — pune, india</p>
+    <header class="hero reveal">
+      <div class="hero-top">
+        <p class="eyebrow">shubham bhagwat · pune, india</p>
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between light and dark">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label" id="themeLabel">dark</span>
+        </button>
+      </div>
+
       <h1>I diagnose systems before I touch them.<br>Infrastructure, a campaign, a business — the method doesn't change.</h1>
-      <nav class="hero-nav">
-        <a href="mailto:shubham.bhagwat37@gmail.com">email</a>
-        <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">github</a>
-        <a href="SHUBHAM-BHAGWAT-RESUME.pdf">resume</a>
-      </nav>
+
+      <div class="hero-foot">
+        <nav class="hero-nav">
+          <a href="mailto:shubham.bhagwat37@gmail.com">email</a>
+          <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">github</a>
+          <a href="SHUBHAM-BHAGWAT-RESUME.pdf">resume</a>
+        </nav>
+        <p class="live-clock" id="liveClock" aria-live="off">local · —:—:—</p>
+      </div>
     </header>
 
-    <section class="block">
-      <h2>What I actually do</h2>
+    <section class="block reveal">
+      <h2><span class="idx">01</span> What I actually do</h2>
       <p class="lede">Three domains, not three separate skills. I treat all of them the same way: understand the system as it actually is before changing anything.</p>
 
       <div class="domains">
         <article class="domain">
+          <p class="domain-idx">D·1</p>
           <h3>Systems &amp; infrastructure</h3>
           <p>DevOps and cloud engineering — Terraform, Docker, Kubernetes, CI/CD, live infra at Persistent Systems (2022–2024). Since then, built and run a personal operations system: self-healing services, live monitoring, and an AI-agent orchestration layer that handles real day-to-day work, not a demo.</p>
         </article>
         <article class="domain">
+          <p class="domain-idx">D·2</p>
           <h3>Marketing &amp; brand systems</h3>
           <p>Ad creative review and campaign consistency for a real business, not theoretical brand strategy. <span class="tbd">[specifics pending — real campaigns/results to be added]</span></p>
         </article>
         <article class="domain">
+          <p class="domain-idx">D·3</p>
           <h3>Real estate operations</h3>
           <p>Lead pipelines, channel-partner relationships, property marketing — an actual business, not a case study. <span class="tbd">[specifics pending — real numbers to be added]</span></p>
         </article>
       </div>
     </section>
 
-    <section class="block casefile">
-      <h2>Watch me think</h2>
-      <p class="lede">A resume says what I've done. This is closer to how I actually do it — narrated as it happened, not cleaned up after. I work through an AI-orchestration workflow for this kind of thing; the reasoning below is real, not staged.</p>
+    <section class="block casefile reveal">
+      <h2><span class="idx">02</span> Watch me think</h2>
+      <p class="lede">A resume says what I've done. This is closer to how I actually do it — narrated as it happened, not cleaned up after. I work through an AI-orchestration workflow for this kind of thing; the reasoning below is real, not staged. This log grows — one entry today, more as they happen.</p>
 
-      <div class="log">
-        <p class="log-meta">case log — 2026-08-28</p>
-        <h3>A slow laptop</h3>
-        <p>Machine felt sluggish. The easy read is "too many browser tabs open." I don't take the easy read.</p>
-        <p>Directed a diagnostic pass through the actual memory subsystem — <code>vm_stat</code>, <code>sysctl</code>, per-process RSS. First pass looked damning: the system's own process monitor showed several processes over 900MB each. Didn't trust it. That tool's memory ranking double-counts shared framework memory across processes — a known, easy-to-miss quirk that makes ordinary background processes look like the culprit. Re-ran the numbers against real per-process memory instead. The actual picture was smaller, and different.</p>
-        <p>The real signal was somewhere else entirely: <strong>8 days, 21 hours of uptime</strong>, and over <strong>1.3 billion memory-compression cycles</strong> since boot. Not one bad app — sustained pressure with no relief, the kind a tab count doesn't explain and a restart fixes in one step, for free.</p>
-        <p>Shipped a standing fix, not just a one-time answer: a single terminal command that surfaces this exact picture — real numbers, categorized by process, root cause included — so next time it's a read, not a guess.</p>
-      </div>
+      <details class="log" open>
+        <summary>
+          <span class="log-idx">LOG · 0001</span>
+          <span class="log-date">2026-08-28</span>
+          <h3>A slow laptop</h3>
+          <span class="log-caret" aria-hidden="true">＋</span>
+        </summary>
+        <div class="log-body">
+          <p>Machine felt sluggish. The easy read is "too many browser tabs open." I don't take the easy read.</p>
+          <p>Directed a diagnostic pass through the actual memory subsystem — <code>vm_stat</code>, <code>sysctl</code>, per-process RSS. First pass looked damning: the system's own process monitor showed several processes over 900MB each. Didn't trust it. That tool's memory ranking double-counts shared framework memory across processes — a known, easy-to-miss quirk that makes ordinary background processes look like the culprit. Re-ran the numbers against real per-process memory instead. The actual picture was smaller, and different.</p>
+          <p>The real signal was somewhere else entirely: <strong>8 days, 21 hours of uptime</strong>, and over <strong>1.3 billion memory-compression cycles</strong> since boot. Not one bad app — sustained pressure with no relief, the kind a tab count doesn't explain and a restart fixes in one step, for free.</p>
+          <p>Shipped a standing fix, not just a one-time answer: a single terminal command that surfaces this exact picture — real numbers, categorized by process, root cause included — so next time it's a read, not a guess.</p>
+        </div>
+      </details>
     </section>
 
-    <section class="block">
-      <h2>Selected work</h2>
+    <section class="block reveal">
+      <h2><span class="idx">03</span> Selected work</h2>
       <ul class="work-list">
         <li>
+          <p class="work-idx">W·01</p>
           <h3>Personal operations system</h3>
-          <p>Live infrastructure monitoring, self-healing background services, and a multi-agent orchestration layer for day-to-day work — the system the case log above came out of.</p>
+          <p>Live infrastructure monitoring, self-healing background services, and a multi-agent orchestration layer for day-to-day work — the system LOG&nbsp;0001 came out of.</p>
         </li>
         <li>
+          <p class="work-idx">W·02</p>
           <h3>sshfm</h3>
           <p>A self-hosted SSH/SFTP file manager — encrypted local connection vault, disk-usage treemap analyzer, real-time audit log. Vue 3, Express, ssh2.</p>
         </li>
         <li>
+          <p class="work-idx">W·03</p>
           <h3>ai-game-of-life</h3>
           <p>Conway's Game of Life, extended — cellular automaton experiments beyond the standard ruleset.</p>
         </li>
@@ -78,16 +110,82 @@
       <p class="note">Repo links pending — some of this lives in a private sandbox right now; deciding what's worth making public.</p>
     </section>
 
-    <section class="block now">
-      <h2>Now</h2>
-      <p>Building out the AI-orchestrated operations approach above as its own practice — starting with real infrastructure and a real business, generalizing from there. If the case log above already made the point, that's the point.</p>
+    <section class="block now reveal">
+      <h2><span class="idx">04</span> Now</h2>
+      <p>Building out the AI-orchestrated operations approach above as its own practice — starting with real infrastructure and a real business, generalizing from there. If LOG&nbsp;0001 already made the point, that's the point.</p>
     </section>
 
-    <footer>
+    <footer class="reveal">
       <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // ---- theme toggle ----
+      var root = document.documentElement;
+      var btn = document.getElementById("themeToggle");
+      var label = document.getElementById("themeLabel");
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function currentTheme() {
+        var explicit = root.getAttribute("data-theme");
+        if (explicit) return explicit;
+        // Read the actually-resolved scheme rather than re-deriving it via
+        // matchMedia separately from what the CSS cascade applied — the two
+        // can drift out of sync. color-scheme is set alongside every token
+        // block, so this always matches what's really on screen.
+        var resolved = getComputedStyle(root).colorScheme;
+        return resolved.indexOf("dark") !== -1 ? "dark" : "light";
+      }
+      function paint() {
+        label.textContent = currentTheme();
+      }
+      btn.addEventListener("click", function () {
+        var next = currentTheme() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        paint();
+      });
+      mq.addEventListener("change", paint);
+      paint();
+
+      // ---- live local clock, Pune (IST) ----
+      var clockEl = document.getElementById("liveClock");
+      function tick() {
+        var now = new Date();
+        var parts = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+        }).formatToParts(now);
+        var map = {};
+        parts.forEach(function (p) { map[p.type] = p.value; });
+        clockEl.textContent = "local · " + map.hour + ":" + map.minute + ":" + map.second + " IST";
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      // ---- scroll reveal ----
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var targets = document.querySelectorAll(".reveal");
+      if (reduced || !("IntersectionObserver" in window)) {
+        targets.forEach(function (el) { el.classList.add("in"); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+        targets.forEach(function (el) { io.observe(el); });
+      }
+    })();
+  </script>
 
 </body>
 </html>
