@@ -1,49 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shubham Bhagwat</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubham Bhagwat</title>
+  <meta name="description" content="Systems engineer — infrastructure, marketing, and real estate operations, one diagnostic method applied across all three.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="main">
-        <header>
-            <div class="header-content">
-                <h1>Shubham Bhagwat</h1>
-                <p>DevOps Engineer / Cloud Engineer</p>
-                <p>Pune, India | shubham.bhagwat37@gmail.com</p>
-                <p>Github: <a href="https://github.com/shubhamxb" target="_blank">shubhamxb</a> | Twitter: <a href="https://twitter.com/shubhamxb" target="_blank">shubhamxb</a></p>
-            </div>
-        </header>
-        <section class="about">
-            <h2>About Me</h2>
-            <p>I am a passionate DevOps and Cloud Engineer with experience in building scalable infrastructures and automation using tools like Terraform, Docker, and Kubernetes. I thrive on solving complex problems and delivering efficient solutions.</p>
-        </section>
-        <section class="resume">
-            <h2>Resume</h2>
-            <ul>
-                <li><strong>DevOps Engineer</strong> at Persistent Systems (July 2023 - Aug 2024)</li>
-                <li><strong>Jr DevOps Engineer</strong> at Persistent Systems (July 2022 - July 2023)</li>
-                <li><strong>Software Intern</strong> at Persistent Systems (Jan 2022 - July 2022)</li>
-                <li><strong>Bachelor’s in Computer Engineering</strong> from Pune University (CGPA: 9.2)</li>
-            </ul>
-            <a href="SHUBHAM-BHAGWAT-RESUME.pdf" class="button">Download Resume</a>
-        </section>
-        <section class="social">
-            <h2>Social Profiles</h2>
-            <ul>
-                <li><a href="https://github.com/shubhamxb" target="_blank">GitHub: shubhamxb</a></li>
-                <li><a href="https://twitter.com/shubhamxb" target="_blank">Twitter: shubhamxb</a></li>
-                <li><a href="https://instagram.com/psych0thinker" target="_blank">Instagram: psych0thinker</a></li>
-                <li><a href="https://steamcommunity.com/id/psych0thinker" target="_blank">Steam: psych0thinker</a></li>
-            </ul>
-        </section>
-        <footer>
-            <p>&copy; 2024 Shubham Bhagwat</p>
-        </footer>
-    </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">shubham bhagwat — pune, india</p>
+      <h1>I diagnose systems before I touch them.<br>Infrastructure, a campaign, a business — the method doesn't change.</h1>
+      <nav class="hero-nav">
+        <a href="mailto:shubham.bhagwat37@gmail.com">email</a>
+        <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">github</a>
+        <a href="SHUBHAM-BHAGWAT-RESUME.pdf">resume</a>
+      </nav>
+    </header>
+
+    <section class="block">
+      <h2>What I actually do</h2>
+      <p class="lede">Three domains, not three separate skills. I treat all of them the same way: understand the system as it actually is before changing anything.</p>
+
+      <div class="domains">
+        <article class="domain">
+          <h3>Systems &amp; infrastructure</h3>
+          <p>DevOps and cloud engineering — Terraform, Docker, Kubernetes, CI/CD, live infra at Persistent Systems (2022–2024). Since then, built and run a personal operations system: self-healing services, live monitoring, and an AI-agent orchestration layer that handles real day-to-day work, not a demo.</p>
+        </article>
+        <article class="domain">
+          <h3>Marketing &amp; brand systems</h3>
+          <p>Ad creative review and campaign consistency for a real business, not theoretical brand strategy. <span class="tbd">[specifics pending — real campaigns/results to be added]</span></p>
+        </article>
+        <article class="domain">
+          <h3>Real estate operations</h3>
+          <p>Lead pipelines, channel-partner relationships, property marketing — an actual business, not a case study. <span class="tbd">[specifics pending — real numbers to be added]</span></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block casefile">
+      <h2>Watch me think</h2>
+      <p class="lede">A resume says what I've done. This is closer to how I actually do it — narrated as it happened, not cleaned up after. I work through an AI-orchestration workflow for this kind of thing; the reasoning below is real, not staged.</p>
+
+      <div class="log">
+        <p class="log-meta">case log — 2026-08-28</p>
+        <h3>A slow laptop</h3>
+        <p>Machine felt sluggish. The easy read is "too many browser tabs open." I don't take the easy read.</p>
+        <p>Directed a diagnostic pass through the actual memory subsystem — <code>vm_stat</code>, <code>sysctl</code>, per-process RSS. First pass looked damning: the system's own process monitor showed several processes over 900MB each. Didn't trust it. That tool's memory ranking double-counts shared framework memory across processes — a known, easy-to-miss quirk that makes ordinary background processes look like the culprit. Re-ran the numbers against real per-process memory instead. The actual picture was smaller, and different.</p>
+        <p>The real signal was somewhere else entirely: <strong>8 days, 21 hours of uptime</strong>, and over <strong>1.3 billion memory-compression cycles</strong> since boot. Not one bad app — sustained pressure with no relief, the kind a tab count doesn't explain and a restart fixes in one step, for free.</p>
+        <p>Shipped a standing fix, not just a one-time answer: a single terminal command that surfaces this exact picture — real numbers, categorized by process, root cause included — so next time it's a read, not a guess.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Selected work</h2>
+      <ul class="work-list">
+        <li>
+          <h3>Personal operations system</h3>
+          <p>Live infrastructure monitoring, self-healing background services, and a multi-agent orchestration layer for day-to-day work — the system the case log above came out of.</p>
+        </li>
+        <li>
+          <h3>sshfm</h3>
+          <p>A self-hosted SSH/SFTP file manager — encrypted local connection vault, disk-usage treemap analyzer, real-time audit log. Vue 3, Express, ssh2.</p>
+        </li>
+        <li>
+          <h3>ai-game-of-life</h3>
+          <p>Conway's Game of Life, extended — cellular automaton experiments beyond the standard ruleset.</p>
+        </li>
+      </ul>
+      <p class="note">Repo links pending — some of this lives in a private sandbox right now; deciding what's worth making public.</p>
+    </section>
+
+    <section class="block now">
+      <h2>Now</h2>
+      <p>Building out the AI-orchestrated operations approach above as its own practice — starting with real infrastructure and a real business, generalizing from there. If the case log above already made the point, that's the point.</p>
+    </section>
+
+    <footer>
+      <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
+    </footer>
+
+  </div>
+
 </body>
 </html>
