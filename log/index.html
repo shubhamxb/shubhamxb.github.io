@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log — Shubham Bhagwat</title>
+  <meta name="description" content="The full case log — real diagnostic work, narrated as it happened.">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero reveal">
+      <div class="hero-top">
+        <p class="eyebrow"><a href="/">← shubham bhagwat</a></p>
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between light and dark">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label" id="themeLabel">dark</span>
+        </button>
+      </div>
+      <h1>The log.</h1>
+      <div class="hero-foot">
+        <nav class="hero-nav"><a href="/">home</a></nav>
+        <p class="live-clock" id="liveClock" aria-live="off">local · —:—:—</p>
+      </div>
+    </header>
+
+    <section class="block casefile reveal">
+      <h2><span class="idx">01</span> Every entry, newest first</h2>
+      <p class="lede">The full archive. Real diagnostic work, narrated as it happened, not cleaned up after.</p>
+
+      <details class="log" open>
+        <summary>
+          <span class="log-idx">LOG · 0001</span>
+          <span class="log-date">2026-08-28</span>
+          <h3>A slow laptop</h3>
+          <span class="log-caret" aria-hidden="true">＋</span>
+        </summary>
+        <div class="log-body">
+          <p>Machine felt sluggish. The easy read is &quot;too many browser tabs open.&quot; I don&#x27;t take the easy read.</p>
+          <p>Directed a diagnostic pass through the actual memory subsystem — <code>vm_stat</code>, <code>sysctl</code>, per-process RSS. First pass looked damning: the system&#x27;s own process monitor showed several processes over 900MB each. Didn&#x27;t trust it. That tool&#x27;s memory ranking double-counts shared framework memory across processes — a known, easy-to-miss quirk that makes ordinary background processes look like the culprit. Re-ran the numbers against real per-process memory instead. The actual picture was smaller, and different.</p>
+          <p>The real signal was somewhere else entirely: <strong>8 days, 21 hours of uptime</strong>, and over <strong>1.3 billion memory-compression cycles</strong> since boot. Not one bad app — sustained pressure with no relief, the kind a tab count doesn&#x27;t explain and a restart fixes in one step, for free.</p>
+          <p>Shipped a standing fix, not just a one-time answer: a single terminal command that surfaces this exact picture — real numbers, categorized by process, root cause included — so next time it&#x27;s a read, not a guess.</p>
+        </div>
+      </details>
+    </section>
+
+    <footer class="reveal">
+      <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
+    </footer>
+  </div>
+
+  <script src="../assets.js"></script>
+</body>
+</html>

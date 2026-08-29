@@ -307,6 +307,31 @@ code {
 .log-body p:last-child { margin-bottom: 0; }
 .log-body strong { color: var(--accent); font-weight: 500; }
 
+/* ---------- case log teaser (home) ---------- */
+
+.log-teaser {
+  padding: 22px 28px 26px;
+}
+.log-teaser-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+.log-teaser-title {
+  font-size: 21px;
+  margin: 4px 0 14px;
+}
+.log-teaser-hook {
+  margin: 0 0 16px;
+  max-width: 62ch;
+  color: var(--ink);
+}
+.log-teaser-link {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
 /* ---------- selected work ---------- */
 
 .work-list {
