@@ -241,13 +241,6 @@ code {
 .domain h3 { font-size: 19px; margin: 0 0 8px; }
 .domain p { margin: 0; max-width: 58ch; color: var(--ink); }
 
-.tbd {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--dim);
-  font-style: normal;
-}
-
 /* ---------- case log ---------- */
 
 .casefile .lede { max-width: 62ch; }
