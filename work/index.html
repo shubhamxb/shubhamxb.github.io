@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — Shubham Bhagwat</title>
+  <meta name="description" content="Selected work, plainly presented.">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero reveal">
+      <div class="hero-top">
+        <p class="eyebrow"><a href="/">← shubham bhagwat</a></p>
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between light and dark">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label" id="themeLabel">dark</span>
+        </button>
+      </div>
+      <h1>Selected work.</h1>
+      <div class="hero-foot">
+        <nav class="hero-nav"><a href="/">home</a> <a href="/about/">about</a></nav>
+        <p class="live-clock" id="liveClock" aria-live="off">local · —:—:—</p>
+      </div>
+    </header>
+
+    <section class="block reveal">
+      <h2><span class="idx">01</span> Everything, in order</h2>
+      <ul class="work-list">
+        <li>
+          <p class="work-idx">W·01</p>
+          <h3>Personal operations system</h3>
+          <p>Live infrastructure monitoring, self-healing background services, and a multi-agent orchestration layer for day-to-day work — the system LOG 0001 came out of.</p>
+        </li>
+        <li>
+          <p class="work-idx">W·02</p>
+          <h3>sshfm</h3>
+          <p>A self-hosted SSH/SFTP file manager — encrypted local connection vault, disk-usage treemap analyzer, real-time audit log. <code>Vue 3</code>, <code>Express</code>, <code>ssh2</code>.</p>
+        </li>
+        <li>
+          <p class="work-idx">W·03</p>
+          <h3>ai-game-of-life</h3>
+          <p>Conway's Game of Life, extended — cellular automaton experiments beyond the standard ruleset.</p>
+        </li>
+      </ul>
+      <p class="note">Repo links pending — some of this lives in a private sandbox right now; deciding what's worth making public.</p>
+    </section>
+
+    <footer class="reveal">
+      <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
+    </footer>
+  </div>
+
+  <script src="../assets.js"></script>
+</body>
+</html>
