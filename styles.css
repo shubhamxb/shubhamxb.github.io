@@ -147,9 +147,54 @@ code {
   * { transition: none !important; }
 }
 
+/* ---------- custom cursor (home.js, desktop only) ---------- */
+
+.has-custom-cursor, .has-custom-cursor a, .has-custom-cursor button {
+  cursor: none;
+}
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.5;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+.cursor-ring--active { width: 54px; height: 54px; opacity: 0.9; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring { transition: none; }
+}
+
 /* ---------- hero ---------- */
 
-.hero { margin-bottom: 80px; }
+.hero { margin-bottom: 80px; position: relative; }
+
+.hero-net {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-top, .hero h1, .hero-foot { position: relative; z-index: 1; }
+
+/* kinetic word reveal (home.js) */
+.hero h1 .word { display: inline-block; overflow: hidden; vertical-align: top; }
+.hero h1 .word-inner { display: inline-block; will-change: transform, opacity; }
 
 .hero-top {
   display: flex;
