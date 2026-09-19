@@ -1,51 +1,66 @@
 (function () {
   "use strict";
 
-  // Homepage-only motion layer — GSAP/ScrollTrigger loaded on index.html
-  // alone, not the other pages, so /about, /work, /log stay light. If the
-  // CDN fails for any reason the page is already fully usable without
-  // this file (progressive enhancement, not a dependency).
-  if (typeof gsap === "undefined") return;
-  gsap.registerPlugin(ScrollTrigger);
-
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
   var lastMouse = { x: -9999, y: -9999 };
 
   // ---- kinetic hero type ----
   // Splits on the existing <br> first so the authored two-line break
-  // survives the rebuild — textContent alone would collapse it.
+  // survives the rebuild — textContent alone would collapse it. Runs
+  // unconditionally, ahead of the GSAP guard below: the reveal itself is
+  // pure CSS (see .word-inner's animation in styles.css), so it doesn't
+  // need GSAP loaded and shouldn't be held hostage to the CDN succeeding.
   var heroH1 = document.querySelector(".hero h1");
   if (heroH1) {
     var lines = heroH1.innerHTML.split(/<br\s*\/?>/i);
+    var wordIndex = 0;
     heroH1.innerHTML = lines.map(function (line) {
       return line.trim().split(/\s+/).map(function (word) {
-        return '<span class="word"><span class="word-inner">' + word + "</span></span>";
+        var delay = (0.15 + wordIndex * 0.026).toFixed(3);
+        wordIndex++;
+        return '<span class="word"><span class="word-inner" style="--word-delay:' + delay + 's">' + word + "</span></span>";
       }).join(" ");
     }).join("<br>");
-
-    if (!reduced) {
-      gsap.set(".hero h1 .word-inner", { yPercent: 110, opacity: 0 });
-      gsap.to(".hero h1 .word-inner", {
-        yPercent: 0, opacity: 1, duration: 0.85, ease: "power3.out",
-        stagger: 0.026, delay: 0.15
-      });
-    }
   }
 
   // ---- scroll-choreographed stagger: domains + work list ----
-  if (!reduced) {
-    ["domains", "work-list"].forEach(function (containerClass) {
-      var items = document.querySelectorAll("." + containerClass + " > *");
-      items.forEach(function (el, i) {
-        gsap.fromTo(el, { opacity: 0, y: 20 }, {
-          opacity: 1, y: 0, duration: 0.55, ease: "power2.out",
-          delay: i * 0.06,
-          scrollTrigger: { trigger: el, start: "top 88%" }
-        });
+  // Plain IntersectionObserver + CSS transition-delay, same mechanism as
+  // assets.js's shared .reveal system — deliberately NOT GSAP/
+  // ScrollTrigger. The hero reveal above stalled mid-animation under
+  // GSAP's rAF ticker when the tab wasn't actively focused (verified with
+  // a real wall-clock test, not assumed); a declarative CSS transition
+  // can't get stuck the same way, so content visibility doesn't depend on
+  // a JS ticker continuing to run. Runs unconditionally — no GSAP needed.
+  (function staggerReveal() {
+    var items = [];
+    document.querySelectorAll(".domains, .work-list").forEach(function (container) {
+      Array.prototype.forEach.call(container.children, function (el, i) {
+        el.classList.add("stagger-item");
+        el.style.setProperty("--stagger-delay", (i * 0.06) + "s");
+        items.push(el);
       });
     });
-  }
+    if (reduced || !("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  // Everything below is genuinely GSAP-dependent (quickTo-driven cursor
+  // follow). If the vendored files fail to load for any reason, the page
+  // above this point — hero reveal, section stagger, node network — is
+  // already fully rendered and correct without it.
+  if (typeof gsap === "undefined") return;
 
   // ---- custom cursor ----
   if (!coarse) {
@@ -72,7 +87,17 @@
       lastMouse.y = e.clientY;
       dotX(e.clientX); dotY(e.clientY);
       ringX(e.clientX); ringY(e.clientY);
+      dot.classList.add("is-visible");
+      ring.classList.add("is-visible");
     }, { passive: true });
+
+    // Hide on window leave — otherwise the dot/ring sit stranded at the
+    // last known point after the pointer leaves the viewport (e.g. onto
+    // the browser chrome or another window).
+    document.documentElement.addEventListener("mouseleave", function () {
+      dot.classList.remove("is-visible");
+      ring.classList.remove("is-visible");
+    });
 
     document.querySelectorAll("a, button, summary").forEach(function (el) {
       el.addEventListener("mouseenter", function () { ring.classList.add("cursor-ring--active"); });
@@ -158,17 +183,31 @@
     }
 
     resize();
-    window.addEventListener("resize", resize, { passive: true });
+
+    // Debounced — a window drag/resize fires this dozens of times a
+    // second otherwise, each one reallocating the whole node array.
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 120);
+    }, { passive: true });
 
     if (reduced) { draw(false); return; }
 
-    function loop() { draw(true); raf = requestAnimationFrame(loop); }
+    var inView = true;
+    function loop() {
+      if (inView && !document.hidden) draw(true);
+      raf = requestAnimationFrame(loop);
+    }
     loop();
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) cancelAnimationFrame(raf);
-      else loop();
-    });
-  })();
 
-  ScrollTrigger.refresh();
+    // Scrolled past the hero → stop doing the per-frame work, not just
+    // stop painting. Tab-hidden is also covered inside loop() itself so
+    // the two checks don't fight over who owns cancelAnimationFrame.
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+      }, { threshold: 0 }).observe(canvas);
+    }
+  })();
 })();

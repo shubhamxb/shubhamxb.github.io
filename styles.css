@@ -159,24 +159,47 @@ code {
   pointer-events: none;
   z-index: 9999;
 }
+.cursor-dot, .cursor-ring {
+  /* Hidden until home.js confirms a real mouse is in play (first
+     mousemove), and hidden again the moment it leaves the window — an
+     unmoved cursor sitting at 0,0 on load, or stuck at the last known
+     point after the pointer leaves the viewport, both read as a bug. */
+  opacity: 0;
+}
+.cursor-dot.is-visible, .cursor-ring.is-visible { opacity: 1; }
+
 .cursor-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
+  transition: opacity 0.2s ease;
 }
 .cursor-ring {
   width: 34px;
   height: 34px;
   border-radius: 50%;
   border: 1px solid var(--accent);
-  opacity: 0.5;
   transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
 }
-.cursor-ring--active { width: 54px; height: 54px; opacity: 0.9; }
+.cursor-ring.is-visible { opacity: 0.5; }
+.cursor-ring.is-visible.cursor-ring--active { width: 54px; height: 54px; opacity: 0.9; }
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring { transition: none; }
+}
+
+/* ---------- section stagger (home.js, domains + work-list) ---------- */
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--stagger-delay, 0s);
+}
+.stagger-item.in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- hero ---------- */
@@ -192,9 +215,26 @@ code {
 
 .hero-top, .hero h1, .hero-foot { position: relative; z-index: 1; }
 
-/* kinetic word reveal (home.js) */
+/* Kinetic word reveal (home.js) — plain CSS keyframes, not a JS-ticker
+   tween. A JS/rAF-driven version (tried first, GSAP) was found to stall
+   mid-animation whenever the tab isn't actively focused/visible — verified
+   with a real wall-clock CDP test, not assumed. A declarative CSS
+   animation is driven by the browser's own animation engine and can't
+   get stuck the same way, matching the reasoning behind the pre-existing
+   .reveal/IntersectionObserver system elsewhere on the page. */
 .hero h1 .word { display: inline-block; overflow: hidden; vertical-align: top; }
-.hero h1 .word-inner { display: inline-block; will-change: transform, opacity; }
+.hero h1 .word-inner {
+  display: inline-block;
+  animation: word-reveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--word-delay, 0s);
+}
+@keyframes word-reveal {
+  from { transform: translateY(110%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .word-inner { animation: none; }
+}
 
 .hero-top {
   display: flex;
