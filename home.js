@@ -56,13 +56,12 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
-  // Everything below is genuinely GSAP-dependent (quickTo-driven cursor
-  // follow). If the vendored files fail to load for any reason, the page
-  // above this point — hero reveal, section stagger, node network — is
-  // already fully rendered and correct without it.
-  if (typeof gsap === "undefined") return;
-
   // ---- custom cursor ----
+  // Hand-rolled rAF + exponential-smoothing lerp, not GSAP. GSAP's only
+  // remaining job in an earlier version of this file was this cursor
+  // follow — ~2% of its API surface didn't justify a 72KB dependency on
+  // a page that's otherwise plain vanilla JS by design (same discipline
+  // as the live clock and node-network canvas elsewhere in this file).
   if (!coarse) {
     document.documentElement.classList.add("has-custom-cursor");
 
@@ -75,18 +74,14 @@
     document.body.appendChild(dot);
     document.body.appendChild(ring);
 
-    gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
-
-    var dotX = gsap.quickTo(dot, "x", { duration: 0.01 });
-    var dotY = gsap.quickTo(dot, "y", { duration: 0.01 });
-    var ringX = gsap.quickTo(ring, "x", { duration: reduced ? 0.01 : 0.45, ease: "power3.out" });
-    var ringY = gsap.quickTo(ring, "y", { duration: reduced ? 0.01 : 0.45, ease: "power3.out" });
+    var ringPos = { x: -9999, y: -9999 };
+    var ringLerp = reduced ? 1 : 0.2;
 
     window.addEventListener("mousemove", function (e) {
       lastMouse.x = e.clientX;
       lastMouse.y = e.clientY;
-      dotX(e.clientX); dotY(e.clientY);
-      ringX(e.clientX); ringY(e.clientY);
+      // Dot tracks exactly, no smoothing — only the ring lags.
+      dot.style.transform = "translate(-50%,-50%) translate(" + e.clientX + "px," + e.clientY + "px)";
       dot.classList.add("is-visible");
       ring.classList.add("is-visible");
     }, { passive: true });
@@ -104,18 +99,38 @@
       el.addEventListener("mouseleave", function () { ring.classList.remove("cursor-ring--active"); });
     });
 
+    // Magnetic pull on nav links / theme toggle — each tracked element
+    // gets a target offset (set on mousemove, zeroed on mouseleave) and
+    // the shared loop below lerps the actual offset toward it every
+    // frame, same smoothing approach as the cursor ring.
+    var magnets = new Map();
     if (!reduced) {
       document.querySelectorAll(".hero-nav a, .theme-toggle").forEach(function (el) {
-        var mx = gsap.quickTo(el, "x", { duration: 0.35, ease: "power3.out" });
-        var my = gsap.quickTo(el, "y", { duration: 0.35, ease: "power3.out" });
+        var state = { x: 0, y: 0, tx: 0, ty: 0 };
+        magnets.set(el, state);
         el.addEventListener("mousemove", function (e) {
           var r = el.getBoundingClientRect();
-          mx((e.clientX - (r.left + r.width / 2)) * 0.3);
-          my((e.clientY - (r.top + r.height / 2)) * 0.3);
+          state.tx = (e.clientX - (r.left + r.width / 2)) * 0.3;
+          state.ty = (e.clientY - (r.top + r.height / 2)) * 0.3;
         });
-        el.addEventListener("mouseleave", function () { mx(0); my(0); });
+        el.addEventListener("mouseleave", function () { state.tx = 0; state.ty = 0; });
       });
     }
+
+    (function cursorLoop() {
+      if (!document.hidden) {
+        ringPos.x += (lastMouse.x - ringPos.x) * ringLerp;
+        ringPos.y += (lastMouse.y - ringPos.y) * ringLerp;
+        ring.style.transform = "translate(-50%,-50%) translate(" + ringPos.x.toFixed(1) + "px," + ringPos.y.toFixed(1) + "px)";
+
+        magnets.forEach(function (state, el) {
+          state.x += (state.tx - state.x) * 0.28;
+          state.y += (state.ty - state.y) * 0.28;
+          el.style.transform = "translate(" + state.x.toFixed(1) + "px," + state.y.toFixed(1) + "px)";
+        });
+      }
+      requestAnimationFrame(cursorLoop);
+    })();
   }
 
   // ---- hero node-network canvas ----
