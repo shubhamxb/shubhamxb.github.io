@@ -31,6 +31,17 @@
 
   // ---- live local clock, Pune (IST) ----
   var clockEl = document.getElementById("liveClock");
+  // Static text node once, then a persistent dot — building the whole
+  // string with textContent every tick would tear down the dot's CSS
+  // animation on every second.
+  var clockText = document.createTextNode("local · —:—:— IST");
+  var clockDot = document.createElement("span");
+  clockDot.className = "live-dot";
+  clockDot.setAttribute("aria-hidden", "true");
+  clockEl.textContent = "";
+  clockEl.appendChild(clockDot);
+  clockEl.appendChild(clockText);
+
   function tick() {
     var now = new Date();
     var parts = new Intl.DateTimeFormat("en-GB", {
@@ -39,10 +50,34 @@
     }).formatToParts(now);
     var map = {};
     parts.forEach(function (p) { map[p.type] = p.value; });
-    clockEl.textContent = "local · " + map.hour + ":" + map.minute + ":" + map.second + " IST";
+    clockText.textContent = "local · " + map.hour + ":" + map.minute + ":" + map.second + " IST";
   }
   tick();
   setInterval(tick, 1000);
+
+  // ---- scroll progress ----
+  // A thin telemetry bar, not decoration — fits the "watch me think" /
+  // instrumentation framing rather than a generic loading-bar trope.
+  var progress = document.createElement("div");
+  progress.className = "scroll-progress";
+  progress.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progress);
+
+  var ticking = false;
+  function updateProgress() {
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0;
+    progress.style.width = pct + "%";
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
+      requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+  updateProgress();
 
   // ---- scroll reveal ----
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
