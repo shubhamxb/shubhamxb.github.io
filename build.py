@@ -184,7 +184,18 @@ LOG_PAGE_TEMPLATE = '''<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log — Shubham Bhagwat</title>
+  <title>Case files — Shubham Bhagwat</title>
+  <meta property="og:title" content="Case files — Shubham Bhagwat">
+  <meta property="og:url" content="https://shubhamxb.github.io/log/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shubham Bhagwat">
+  <meta property="og:image" content="https://shubhamxb.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="I build systems that run themselves. Shubham Bhagwat, builds digital systems.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://shubhamxb.github.io/og.png">
+  <meta name="theme-color" content="#0d1230">
   <meta name="description" content="The full case log — real diagnostic work, narrated as it happened.">
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -298,6 +309,17 @@ WORK_PAGE_TEMPLATE = '''<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Work — Shubham Bhagwat</title>
+  <meta property="og:title" content="Selected work — Shubham Bhagwat">
+  <meta property="og:url" content="https://shubhamxb.github.io/work/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shubham Bhagwat">
+  <meta property="og:image" content="https://shubhamxb.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="I build systems that run themselves. Shubham Bhagwat, builds digital systems.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://shubhamxb.github.io/og.png">
+  <meta name="theme-color" content="#0d1230">
   <meta name="description" content="Selected work, plainly presented.">
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
