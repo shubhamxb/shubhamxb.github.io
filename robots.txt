@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shubhamxb.github.io/sitemap.xml
