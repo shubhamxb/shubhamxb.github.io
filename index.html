@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shubham Bhagwat</title>
-  <meta name="description" content="Systems engineer — infrastructure, marketing, and real estate operations, one diagnostic method applied across all three.">
+  <title>Shubham Bhagwat — builds digital systems</title>
+  <meta name="description" content="I build systems that run themselves: infrastructure, AI operations, marketing and real estate, wired into one working machine.">
+  <meta property="og:title" content="Shubham Bhagwat — builds digital systems">
+  <meta property="og:description" content="Infrastructure, AI operations, marketing and real estate, wired into one working machine.">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Schibsted+Grotesk:wght@400;500;600&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
-    // Applied before paint so there's no flash of the wrong theme.
     (function () {
       try {
         var saved = localStorage.getItem("theme");
@@ -20,60 +21,115 @@
     })();
   </script>
 </head>
-<body>
+<body class="home">
 
-  <div class="wrap">
+  <a class="skip" href="#main">Skip to content</a>
 
-    <header class="hero reveal">
-      <canvas class="hero-net" id="netCanvas" aria-hidden="true"></canvas>
-      <div class="hero-top">
-        <p class="eyebrow">shubham bhagwat · pune, india</p>
-        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between light and dark">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label" id="themeLabel">dark</span>
-        </button>
+  <header class="top">
+    <a class="mark" href="/" aria-label="Shubham Bhagwat, home"><span class="mark-sb">SB</span><span class="mark-name">Shubham Bhagwat</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="#build">What I build</a>
+      <a href="#ways">Work with me</a>
+      <a href="/log/">Case files</a>
+      <a href="/about/">About</a>
+    </nav>
+    <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between dark and light">
+      <span class="toggle-label" id="themeLabel">dark</span>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Builds digital systems · Pune, India</p>
+        <h1 id="hero-title"><span>I build systems</span> <span>that run</span> <span>themselves.</span></h1>
+        <p class="hero-sub">Infrastructure, AI operations, marketing and real estate, wired into one working machine. The panel beside this isn't a mockup. It's my own system: two machines and two AI agents keeping real work moving, as it stood when I last published.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:shubham.bhagwat37@gmail.com?subject=Let%27s%20build%20something">Start a conversation</a>
+          <a class="btn btn-quiet" href="/log/">See how I think</a>
+        </div>
       </div>
 
-      <h1>I look for what's actually wrong before I fix anything.<br>Infrastructure, a campaign, a business — same method, different noun.</h1>
-
-      <div class="hero-foot">
-        <nav class="hero-nav">
-          <a href="/about/">about</a>
-          <a href="mailto:shubham.bhagwat37@gmail.com">email</a>
-          <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">github</a>
-          <a href="SHUBHAM-BHAGWAT-RESUME.pdf">resume</a>
-        </nav>
-        <p class="live-clock" id="liveClock" aria-live="off">local · —:—:—</p>
-      </div>
-    </header>
-
-    <section class="block reveal">
-      <h2><span class="idx">01</span> What I actually do</h2>
-      <p class="lede">Three domains, not three separate skills. I treat all of them the same way: understand the system as it actually is before changing anything.</p>
-
-      <div class="domains">
-        <article class="domain">
-          <p class="domain-idx">D·1</p>
-          <h3>Systems &amp; infrastructure</h3>
-          <p>DevOps and cloud engineering — Terraform, Docker, Kubernetes, CI/CD, live infra at Persistent Systems (2022–2024). Since then, built and run a personal operations system: self-healing services, live monitoring, and an AI-agent orchestration layer that handles real day-to-day work, not a demo.</p>
-        </article>
-        <article class="domain">
-          <p class="domain-idx">D·2</p>
-          <h3>Marketing &amp; brand systems</h3>
-          <p>Ad creative review and campaign consistency for a real business, not theoretical brand strategy.</p>
-        </article>
-        <article class="domain">
-          <p class="domain-idx">D·3</p>
-          <h3>Real estate operations</h3>
-          <p>Lead pipelines, channel-partner relationships, property marketing — an actual business, not a case study.</p>
-        </article>
-      </div>
+      <figure class="instrument" id="instrument" aria-labelledby="instrument-cap">
+        <div class="inst-head">
+          <span class="inst-title">operating system</span>
+          <span class="inst-stamp" id="instStamp">snapshot</span>
+        </div>
+        <div class="inst-body" id="instBody">
+          <!-- drawn by home.js from the snapshot below; this list is what readers without scripts see -->
+          <ul class="inst-fallback">
+            <li>the overlook: the Mac I work from, run by an agent called vesper</li>
+            <li>hearth: an always-on homelab, run by an agent called wick</li>
+            <li>one shared board between them; nothing ships without my yes</li>
+          </ul>
+        </div>
+        <figcaption id="instrument-cap" class="inst-cap">Live counts from my own setup, refreshed each time this site is rebuilt. Service names and addresses stay private.</figcaption>
+      </figure>
+      <!-- SYSTEM:START -->
+      <script type="application/json" id="system-data">{"asOf":"2026-10-09","machines":[{"id":"overlook","name":"the overlook","role":"where I work","agent":"vesper"},{"id":"hearth","name":"hearth","role":"always on","agent":"wick"}],"districts":[{"name":"cinema","up":9,"n":9},{"name":"archive","up":4,"n":4},{"name":"tower","up":11,"n":11},{"name":"loom","up":7,"n":7},{"name":"docks","up":8,"n":8},{"name":"lab","up":8,"n":8}],"services":{"up":47,"n":47},"tickets":200,"crew":8}</script>
+      <!-- SYSTEM:END -->
     </section>
 
-    <section class="block casefile reveal">
-      <h2><span class="idx">02</span> Watch me think</h2>
-      <p class="lede">A resume says what I've done. This is closer to how I actually do it — narrated as it happened, not cleaned up after. I work through an AI-orchestration workflow for this kind of thing; the reasoning below is real, not staged. This log grows — one entry today, more as they happen.</p>
+    <section class="band" id="build" aria-labelledby="build-title">
+      <header class="band-head">
+        <h2 id="build-title">One method, four systems.</h2>
+        <p class="band-lede">I find what's actually wrong before I fix anything, then build the thing that keeps it fixed. Same method whether the system is a server, a sales pipeline or a brand.</p>
+      </header>
+      <ol class="circuit">
+        <li class="node">
+          <h3>Infrastructure</h3>
+          <p>Servers, containers, pipelines, and the monitoring that tells you before something breaks.</p>
+          <p class="proof">DevOps at Persistent Systems, 2022–24 · runs a ~50-service homelab today</p>
+        </li>
+        <li class="node">
+          <h3>AI operations</h3>
+          <p>Agents that do real work: triage, follow-ups, reports, the slow middle of running a business.</p>
+          <p class="proof">two agents, one shared board · every decision a yes or no I approve</p>
+        </li>
+        <li class="node">
+          <h3>Marketing systems</h3>
+          <p>Brand, creative and campaign machinery that stays consistent as it grows.</p>
+          <p class="proof">ad creative review and campaign consistency for a live business</p>
+        </li>
+        <li class="node">
+          <h3>Real estate operations</h3>
+          <p>Lead pipelines, channel partners and property marketing, run like a system instead of a spreadsheet.</p>
+          <p class="proof">an operating real estate business, not a case study</p>
+        </li>
+      </ol>
+    </section>
 
+    <section class="band ways" id="ways" aria-labelledby="ways-title">
+      <header class="band-head">
+        <h2 id="ways-title">Three ways in.</h2>
+        <p class="band-lede">Most work starts with a 30-minute call. Tell me what's broken, or what you want built.</p>
+      </header>
+      <div class="ways-grid">
+        <article class="way">
+          <h3>Build</h3>
+          <p>From a blank page to running: the infrastructure, the AI on top of it, and the one screen you check.</p>
+          <p class="way-out"><span>you get</span> it running, documented, handed over</p>
+        </article>
+        <article class="way">
+          <h3>Rescue</h3>
+          <p>Something's slow, broken, or nobody understands it any more. I trace it to the real cause first.</p>
+          <p class="way-out"><span>you get</span> the cause, the fix, and why it won't come back</p>
+        </article>
+        <article class="way">
+          <h3>Run</h3>
+          <p>I operate it with my agents. You get the outcomes and a short weekly read-out, not a dashboard to babysit.</p>
+          <p class="way-out"><span>you get</span> a system that keeps working without you</p>
+        </article>
+      </div>
+      <p class="ways-cta"><a class="btn btn-primary" href="mailto:shubham.bhagwat37@gmail.com?subject=Let%27s%20build%20something">Email me</a> <span class="ways-mail">shubham.bhagwat37@gmail.com</span></p>
+    </section>
+
+    <section class="band" id="cases" aria-labelledby="cases-title">
+      <header class="band-head">
+        <h2 id="cases-title">Case files.</h2>
+        <p class="band-lede">How I actually think, narrated as it happened rather than cleaned up after.</p>
+      </header>
       <!-- LOG-TEASER:START -->
       <div class="log log-teaser">
         <div class="log-teaser-head">
@@ -87,8 +143,10 @@
       <!-- LOG-TEASER:END -->
     </section>
 
-    <section class="block reveal">
-      <h2><span class="idx">03</span> Selected work</h2>
+    <section class="band" id="work" aria-labelledby="work-title">
+      <header class="band-head">
+        <h2 id="work-title">Selected work.</h2>
+      </header>
       <!-- WORK-TEASER:START -->
       <ul class="work-list">
         <li>
@@ -111,19 +169,18 @@
       <!-- WORK-TEASER:END -->
     </section>
 
-    <section class="block now reveal">
-      <h2><span class="idx">04</span> Now</h2>
-      <p>Building out the AI-orchestrated operations approach above as its own practice — starting with real infrastructure and a real business, generalizing from there. If LOG&nbsp;0001 already made the point, that's the point.</p>
-    </section>
+  </main>
 
-    <footer class="reveal">
-      <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
-    </footer>
-
-  </div>
+  <footer class="foot">
+    <p class="foot-line">Shubham Bhagwat · <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Elsewhere">
+      <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">GitHub</a>
+      <a href="SHUBHAM-BHAGWAT-RESUME.pdf">Resume</a>
+      <span class="live-clock" id="liveClock" aria-live="off">Pune · —:—</span>
+    </nav>
+  </footer>
 
   <script src="assets.js"></script>
   <script src="home.js"></script>
-
 </body>
 </html>

@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Schibsted+Grotesk:wght@400;500;600&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <script>
     (function () {
@@ -20,24 +20,26 @@
   </script>
 </head>
 <body>
-  <div class="wrap">
-    <header class="hero reveal">
-      <div class="hero-top">
-        <p class="eyebrow"><a href="/">← shubham bhagwat</a></p>
-        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between light and dark">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label" id="themeLabel">dark</span>
-        </button>
-      </div>
-      <h1>Selected work.</h1>
-      <div class="hero-foot">
-        <nav class="hero-nav"><a href="/">home</a> <a href="/about/">about</a></nav>
-        <p class="live-clock" id="liveClock" aria-live="off">local · —:—:—</p>
-      </div>
-    </header>
-
-    <section class="block reveal">
-      <h2><span class="idx">01</span> Everything, in order</h2>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="mark" href="/" aria-label="Shubham Bhagwat, home"><span class="mark-sb">SB</span><span class="mark-name">Shubham Bhagwat</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="/#build">What I build</a>
+      <a href="/#ways">Work with me</a>
+      <a href="/log/">Case files</a>
+      <a href="/about/">About</a>
+    </nav>
+    <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch between dark and light">
+      <span class="toggle-label" id="themeLabel">dark</span>
+    </button>
+  </header>
+  <main id="main">
+    <section class="page-head">
+      <p class="eyebrow">Selected work</p>
+      <h1>Everything, in order.</h1>
+      <p>Built, running, or in use. Plainly described.</p>
+    </section>
+    <section class="band">
       <ul class="work-list">
         <li>
           <p class="work-idx">W·01</p>
@@ -57,11 +59,15 @@
       </ul>
       <p class="note">Repo links pending — some of this lives in a private sandbox right now; deciding what's worth making public.</p>
     </section>
-
-    <footer class="reveal">
-      <p>Shubham Bhagwat — <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
-    </footer>
-  </div>
+  </main>
+  <footer class="foot">
+    <p class="foot-line">Shubham Bhagwat · <a href="mailto:shubham.bhagwat37@gmail.com">shubham.bhagwat37@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Elsewhere">
+      <a href="https://github.com/shubhamxb" target="_blank" rel="noopener">GitHub</a>
+      <a href="/SHUBHAM-BHAGWAT-RESUME.pdf">Resume</a>
+      <span class="live-clock" id="liveClock" aria-live="off">Pune · —:—</span>
+    </nav>
+  </footer>
 
   <script src="../assets.js"></script>
 </body>
