@@ -293,3 +293,6 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   .will-reveal { opacity: 1; transform: none; }
 }
+
+.page-head .eyebrow { margin-bottom: 22px; }
+.page-head h1, .hero h1 { padding-top: 0.06em; }
