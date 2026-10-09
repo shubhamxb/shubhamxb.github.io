@@ -198,6 +198,7 @@ LOG_PAGE_TEMPLATE = '''<!DOCTYPE html>
   <meta name="theme-color" content="#0d1230">
   <meta name="description" content="The full case log — real diagnostic work, narrated as it happened.">
   <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Schibsted+Grotesk:wght@400;500;600&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -322,6 +323,7 @@ WORK_PAGE_TEMPLATE = '''<!DOCTYPE html>
   <meta name="theme-color" content="#0d1230">
   <meta name="description" content="Selected work, plainly presented.">
   <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Schibsted+Grotesk:wght@400;500;600&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
