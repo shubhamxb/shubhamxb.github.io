@@ -3,7 +3,7 @@ index: "0003"
 date: 2026-10-09
 domain: build
 title: "Two machines, one mind"
-status: draft
+status: published
 ---
 I run two machines. The Mac is where I work; it sleeps, closes, travels. Hearth is an old laptop in a cupboard that never turns off and runs about fifty services. Each has its own AI agent: vesper on the Mac, wick on hearth. For a while they worked like two contractors who'd never met. I was the one carrying messages between them, which is exactly the job I'd built them to take off my hands.
 
