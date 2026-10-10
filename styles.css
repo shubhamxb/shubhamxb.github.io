@@ -276,7 +276,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 }
 @media (max-width: 720px) {
   .top { flex-wrap: wrap; gap: 14px 20px; }
-  .top-nav { order: 3; width: 100%; margin-left: 0; gap: 16px; overflow-x: auto; }
+  .top-nav { order: 3; width: 100%; margin-left: 0; gap: 10px 16px; flex-wrap: wrap; }
   .theme-toggle { margin-left: auto; }
   .node, .work-list > li { grid-template-columns: 1fr; }
   .node h3 { grid-row: auto; }
