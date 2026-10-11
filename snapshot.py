@@ -7,10 +7,11 @@ ports, container or service names.
 
 Sources (all optional; the last published value is kept for anything that can't be read):
   ~/.overlook/state/live.json     the mac's `live` snapshot (hearth's districts, grouped the way hearth's bar groups them)
-  ssh hearth board-cache.json     how many tickets the shared board has carried
+  ssh $SNAPSHOT_HOST $SNAPSHOT_TICKETS_CMD   how many tickets the shared board has carried (configured locally, not here)
 Run: python3 snapshot.py  (then commit; the site stays static)
 """
 import json
+import os
 import re
 import subprocess
 import time
@@ -34,7 +35,7 @@ def districts():
         return None
     out = {}
     for x in items:
-        if x.get("where") != "charlie":
+        if x.get("where") not in ("charlie", "hearth"):
             continue
         g = out.setdefault(x["group"], {"name": x["group"], "up": 0, "n": 0})
         g["n"] += 1
@@ -45,7 +46,7 @@ def districts():
 def tickets():
     try:
         r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=6", "-o", "ControlMaster=no", "-o", "ClearAllForwardings=yes",
-                            "sentinel", "python3 -c 'import json;print(len(json.load(open(\"/home/zero/warden/state/board-cache.json\"))[\"tickets\"]))'"],
+                            os.environ.get("SNAPSHOT_HOST", "hearth"), os.environ.get("SNAPSHOT_TICKETS_CMD", "board-count")],
                            stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=20)
         return int(r.stdout.strip())
     except Exception:
