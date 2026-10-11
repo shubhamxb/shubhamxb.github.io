@@ -42,7 +42,7 @@
     '<dl class="readouts">' +
       '<div><dt>services up</dt><dd>' + sv.up + '<small>/' + sv.n + '</small></dd></div>' +
       '<div><dt>board tickets</dt><dd>' + (d.tickets || 0) + '</dd></div>' +
-      '<div><dt>agents</dt><dd>' + (2 + (d.crew || 0)) + '</dd></div>' +
+      '<div><dt>crew agents</dt><dd>' + (d.crew || 0) + '</dd></div>' +
     '</dl>';
 
   if (stamp && d.asOf) stamp.textContent = "snapshot · " + d.asOf;

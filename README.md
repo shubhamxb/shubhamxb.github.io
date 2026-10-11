@@ -17,6 +17,8 @@ Plain HTML, CSS and a little JavaScript. No framework, no build step to serve it
 | `build.py` | renders `/log/` and `/work/`, and the latest-entry teasers on the home page. Python 3, standard library only |
 | `snapshot.py` | refreshes the hero instrument's numbers from my own system. Only aggregate counts and district names go public |
 | `about/` | background, hand-written |
+| `_design/` | sources for the share card (`og.png`) and the icons, with their render scripts; never published |
+| `_config.yml` | tells github pages' jekyll to publish none of the sources |
 
 ## Publishing
 

@@ -62,7 +62,8 @@ def main():
     t = tickets()
     if t:
         d["tickets"] = t
-    d.setdefault("crew", 8)
+    agents = Path.home() / ".claude/agents"
+    d["crew"] = len(list(agents.glob("*.md"))) if agents.exists() else d.get("crew", 8)  # the crew under the two lead agents
     d["asOf"] = time.strftime("%Y-%m-%d")
     blob = json.dumps(d, separators=(",", ":"))
     html = INDEX.read_text()

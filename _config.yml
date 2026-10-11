@@ -1,10 +1,10 @@
+# folders starting with _ (like _design, the og card + icon sources) are never published.
 # github pages runs jekyll over this repo. the site is plain html; jekyll's only job is to NOT publish the sources:
 # markdown with frontmatter would otherwise become public pages (drafts included), and the scripts would be served raw.
 exclude:
   - build.py
   - snapshot.py
   - README.md
-  - og
   - log-entries
   - work-items
   - js
