@@ -7,5 +7,4 @@ exclude:
   - README.md
   - log-entries
   - work-items
-  - js
   - .claude
