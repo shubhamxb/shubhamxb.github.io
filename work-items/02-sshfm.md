@@ -3,4 +3,4 @@ index: "02"
 title: "sshfm"
 status: published
 ---
-A self-hosted SSH/SFTP file manager — encrypted local connection vault, disk-usage treemap analyzer, real-time audit log. `Vue 3`, `Express`, `ssh2`.
+Your servers' files in the browser: browse, transfer, and see what's eating the disk, with saved connections encrypted on your own machine. **[Try the live demo](https://shubhamxb.github.io/sshfm/)**: a pretend server in your browser tab, no sign-up. [Source](https://github.com/shubhamxb/sshfm). `Vue 3`, `Express`, `ssh2`.
